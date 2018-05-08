@@ -28,13 +28,13 @@ reg				bypass_n;
 wire		[WIDTH - 1 : 0] in 		[0 : 3];
 wire		[WIDTH - 1 : 0] out 		[0 : 3];
 
+//A_port for Read, B_port for write 
+bram ram0(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(), .DO_A(ram_out[0]), .We_B(we[0]), .Addr_B(addr[0]), .DI_B(ram_in[0]), .DO_B());
+bram ram1(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(), .DO_A(ram_out[1]), .We_B(we[1]), .Addr_B(addr[0]), .DI_B(ram_in[1]), .DO_B());
+bram ram2(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(), .DO_A(ram_out[2]), .We_B(we[2]), .Addr_B(addr[1]), .DI_B(ram_in[2]), .DO_B());
+bram ram3(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(), .DO_A(ram_out[3]), .We_B(we[3]), .Addr_B(addr[1]), .DI_B(ram_in[3]), .DO_B());
 
-bram ram0(.Clk(Clk), .En(1'b1), .We(we[0]), .Addr_A(addr[0]), .DI_A(ram_in[0]), .DO_A(ram_out[0]));
-bram ram1(.Clk(Clk), .En(1'b1), .We(we[1]), .Addr_A(addr[0]), .DI_A(ram_in[1]), .DO_A(ram_out[1]));
-bram ram2(.Clk(Clk), .En(1'b1), .We(we[2]), .Addr_A(addr[1]), .DI_A(ram_in[2]), .DO_A(ram_out[2]));
-bram ram3(.Clk(Clk), .En(1'b1), .We(we[3]), .Addr_A(addr[1]), .DI_A(ram_in[3]), .DO_A(ram_out[3]));
-
-bram tfram(.Clk(Clk), .En(1'b1), .We(1'b0), .Addr_A(tf_addr), .DI_A(0), .DO_A(tf_out));
+bram tfram(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(tf_addr), .DI_A(0), .DO_B(), .We_B(), .Addr_B(), .DI_B(), .DO_B());
 
 pe pe0 (
 	.Clk(Clk), .Reset_n(Reset_n),
@@ -43,6 +43,17 @@ pe pe0 (
 	.tf(tf_out), .bypass_n(bypass_n);
 	);
 
+assign bypass_n = (stage >= 3'd6) ? 1 : 0;
+
+always @ (posedge Clk)
+	begin
+	if (Reset_n == 1'b0)
+		done <= 0;
+	else if (stage == 3'd7 && counter == 0)
+		done <= 1;
+	else
+		done <= done;
+	end
 
 always @ (posedge Clk)
 	begin 
@@ -83,6 +94,11 @@ always @ (*)
 		3'd7:
 			addr[1] = 0;
 
+	end
+
+always @ (*)
+	begin
+	//// Still missing Addr count for twiddle factor
 	end
 
 always @ (*)
