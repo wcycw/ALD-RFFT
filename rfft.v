@@ -20,7 +20,7 @@ reg 		[6 : 0]		w_counter;
 
 wire		[5 : 0]		addr		[0 : 1];
 wire		[5 : 0]		w_addr		[0 : 1];
-reg		[WIDTH - 1 : 0]	ram_in		[0 : 3];
+wire		[WIDTH - 1 : 0]	ram_in		[0 : 3];
 wire		[WIDTH - 1 : 0] ram_out		[0 : 3];
 reg				we ;
 
@@ -42,7 +42,7 @@ bram tfram(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(tf_addr), .DI_A(0), .DO_B(
 pe pe0 (
 	.Clk(Clk), .Reset_n(Reset_n),
 	.in0(in[0]), .in1(in[1]), .in2(in[2]), .in3(in[3]), 
-	.in0(in[0]), .in1(in[1]), .in2(in[2]), .in3(in[3]), 
+	.out0(out[0]), .out1(out[1]), .out2(out[2]), .out3(out[3]), 
 	.tf(tf_out), .bypass_n(bypass_n);
 	);
 
