@@ -1,11 +1,12 @@
 module rfft (
-	Clk, Reset_n
+	Clk, Reset_n,
 	done
 
 );
 
 parameter WIDTH = 32;
-parameter LIMIT = 66; //64 + say 2 need to count delay
+parameter LIMIT = 63;  // 256/4-1
+parameter VALID = 2;   // clock for to be valide
 
 input 				Clk;
 input 				Reset_n;
@@ -14,12 +15,14 @@ output 		reg		done;
 reg				fin;
 reg 		[3 : 0]		stage;
 reg 		[6 : 0]		counter;
+reg 		[6 : 0]		w_counter;
 
 
 wire		[5 : 0]		addr		[0 : 1];
+wire		[5 : 0]		w_addr		[0 : 1];
 reg		[WIDTH - 1 : 0]	ram_in		[0 : 3];
 wire		[WIDTH - 1 : 0] ram_out		[0 : 3];
-reg				we 		[0 : 3];
+reg				we ;
 
 wire 		[5 : 0] 	tf_addr;
 wire		[WIDTH - 1 : 0]	tf_out;
@@ -29,10 +32,10 @@ wire		[WIDTH - 1 : 0] in 		[0 : 3];
 wire		[WIDTH - 1 : 0] out 		[0 : 3];
 
 //A_port for Read, B_port for write 
-bram ram0(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(), .DO_A(ram_out[0]), .We_B(we[0]), .Addr_B(addr[0]), .DI_B(ram_in[0]), .DO_B());
-bram ram1(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(), .DO_A(ram_out[1]), .We_B(we[1]), .Addr_B(addr[0]), .DI_B(ram_in[1]), .DO_B());
-bram ram2(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(), .DO_A(ram_out[2]), .We_B(we[2]), .Addr_B(addr[1]), .DI_B(ram_in[2]), .DO_B());
-bram ram3(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(), .DO_A(ram_out[3]), .We_B(we[3]), .Addr_B(addr[1]), .DI_B(ram_in[3]), .DO_B());
+bram ram0(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(), .DO_A(ram_out[0]), .We_B(we), .Addr_B(w_addr[0]), .DI_B(ram_in[0]), .DO_B());
+bram ram1(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(), .DO_A(ram_out[1]), .We_B(we), .Addr_B(w_addr[0]), .DI_B(ram_in[1]), .DO_B());
+bram ram2(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(), .DO_A(ram_out[2]), .We_B(we), .Addr_B(w_addr[1]), .DI_B(ram_in[2]), .DO_B());
+bram ram3(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(), .DO_A(ram_out[3]), .We_B(we), .Addr_B(w_addr[1]), .DI_B(ram_in[3]), .DO_B());
 
 bram tfram(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(tf_addr), .DI_A(0), .DO_B(), .We_B(), .Addr_B(), .DI_B(), .DO_B());
 
@@ -43,7 +46,8 @@ pe pe0 (
 	.tf(tf_out), .bypass_n(bypass_n);
 	);
 
-assign bypass_n = (stage >= 3'd6) ? 1 : 0;
+assign bypass_n = (stage >= 3'd6) ? 0 : 1;
+assign we = (counter >= VALID) ? 1 : 0;
 
 always @ (posedge Clk)
 	begin
@@ -57,7 +61,7 @@ always @ (posedge Clk)
 
 always @ (posedge Clk)
 	begin 
-	if (Reset_n == 1'b0 || counter == LIMIT)
+	if (Reset_n == 1'b0 || counter == (LIMIT + VALID))
 		counter <= 0;
 	else	
 		counter <= counter + 1'b1;
@@ -65,34 +69,68 @@ always @ (posedge Clk)
 
 always @ (posedge Clk)
 	begin 
+	if (Reset_n == 1'b0 || counter <= VALID || w_counter == LIMIT)
+		w_counter <= 0;
+	else	
+		w_counter <= w_counter + 1'b1;
+	end
+
+always @ (posedge Clk)
+	begin 
 	if (Reset_n == 1'b0 )
 		stage <= 0;
-	else if (counter == LIMIT)	
+	else if (w_counter == LIMIT)	
 		stage <= stage + 1'b1;
 	else 
 		stage <= stage;
 	end
 
-assign addr[0] = (stage == 3'd7) ? 0 : counter[5 : 0];
+assign   addr[0] = (stage == 3'd7) ? 0 : counter[5 : 0];
+assign w_addr[0] = (stage == 3'd7) ? 0 : w_counter[5 : 0];
+
 always @ (*)
 	begin
 	case (stage)
-		3'd0:
-			addr[1] = counter[5:0];
+		3'd0:	
+			begin
+			  addr[1] = counter[5:0];
+			w_addr[1] = w_counter[5:0];
+			end
 		3'd1:
-			addr[1] = { ~counter[5] : couter[4:0]}; 
+			begin
+			  addr[1] = { ~counter[5] : couter[4:0]}; 
+			w_addr[1] = { ~w_counter[5] : w_couter[4:0]}; 
+			end
 		3'd2:
-			addr[1] = { ~counter[5:4] : couter[3:0]}; 
+			begin
+			  addr[1] = { ~counter[5:4] : couter[3:0]};
+			w_addr[1] = { ~w_counter[5:4] : w_couter[3:0]}; 
+			end 
 		3'd3:
-			addr[1] = { ~counter[5:3] : couter[2:0]}; 
+			begin
+			  addr[1] = { ~counter[5:3] : couter[2:0]}; 
+			w_addr[1] = { ~w_counter[5:3] : w_couter[2:0]}; 
+			end
 		3'd4:
-			addr[1] = { ~counter[5:2] : couter[1:0]}; 
+			begin
+			  addr[1] = { ~counter[5:2] : couter[1:0]}; 
+			w_addr[1] = { ~w_counter[5:2] : w_couter[1:0]}; 
+			end
 		3'd5:
-			addr[1] = { ~counter[5:1] : couter[0]}; 
+			begin
+			  addr[1] = { ~counter[5:1] : couter[0]};
+			w_addr[1] = { ~w_counter[5:1] : w_couter[0]};
+			end 
 		3'd6:
-			addr[1] = ~counter[5:0]; 
+			begin
+			  addr[1] = ~counter[5:0]; 
+			w_addr[1] = ~w_counter[5:0]; 
+			end
 		3'd7:
-			addr[1] = 0;
+			begin
+			  addr[1] = 0;
+			w_addr[1] = 0;
+			end
 
 	end
 
