@@ -25,7 +25,7 @@ output reg 	[WIDTH - 1 : 0]		out3;
 input 		[WIDTH - 1 : 0]		tf;
 input 					bypass_n;
 
-
+reg		[WIDTH - 1 : 0]		tf0
 reg		[WIDTH - 1 : 0]		mid0[0 : 3];
 reg		[WIDTH - 1 : 0]		mid1[0 : 3];
 reg		[2* WIDTH - 1 : 0]	mid11[0 : 1];
@@ -40,6 +40,7 @@ always @ (posedge Clk)
 		mid0[1] <= 0;
 		mid0[2] <= 0;
 		mid0[3] <= 0;
+		tf0	<= 0;
 		end
 	else 
 		begin
@@ -47,6 +48,7 @@ always @ (posedge Clk)
 		mid0[1] <= in0 - in1;
 		mid0[2] <= in2 + in3;
 		mid0[3] <= in2 - in3;
+		tf0	<= tf;
 		end
 	end
 
@@ -67,8 +69,8 @@ always @ (posedge Clk)
 		mid1[1] <= mid0[2];
 		mid1[2] <= mid0[1];
 		mid1[3] <= mid0[3];
-		mid11[0] <= mid0[1] * tf;
-		mid11[1] <= mid0[3] * tf;
+		mid11[0] <= mid0[1] * tf0;
+		mid11[1] <= mid0[3] * tf0;
 		end
 	end
 
