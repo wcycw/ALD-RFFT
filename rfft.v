@@ -8,28 +8,28 @@ parameter WIDTH = 32;
 parameter LIMIT = 63;  // 256/4-1
 parameter VALID = 2;   // clock for to be valide
 
-input 				Clk;
-input 				Reset_n;
-output 		reg		done;
+input 					Clk;
+input 					Reset_n;
+output 		reg			done;
 
-reg				fin;
-reg 		[3 : 0]		stage;
-reg 		[6 : 0]		counter;
-reg 		[6 : 0]		w_counter;
+reg					fin;
+reg 		[3 : 0]			stage;
+reg 		[6 : 0]			counter;
+reg 		[6 : 0]			w_counter;
 
 
-wire		[5 : 0]		addr		[0 : 1];
-wire		[5 : 0]		w_addr		[0 : 1];
-wire		[WIDTH - 1 : 0]	ram_in		[0 : 3];
-wire		[WIDTH - 1 : 0] ram_out		[0 : 3];
-reg				we ;
+wire		[5 : 0]			addr		[0 : 1];
+wire		[5 : 0]			w_addr		[0 : 1];
+wire		[2* WIDTH - 1 : 0]	ram_in		[0 : 3];
+wire		[2* WIDTH - 1 : 0] 	ram_out		[0 : 3];
+reg					we ;
 
-wire 		[5 : 0] 	tf_addr;
-wire		[WIDTH - 1 : 0]	tf_out;
+wire 		[5 : 0] 		tf_addr;
+wire		[2* WIDTH - 1 : 0]	tf_out;
 
-reg				bypass_n;
-wire		[WIDTH - 1 : 0] in 		[0 : 3];
-wire		[WIDTH - 1 : 0] out 		[0 : 3];
+reg					bypass_n;
+wire		[2* WIDTH - 1 : 0] 	in 		[0 : 3];
+wire		[2* WIDTH - 1 : 0] 	out 		[0 : 3];
 
 //A_port for Read, B_port for write 
 bram ram0(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(), .DO_A(ram_out[0]), .We_B(we), .Addr_B(w_addr[0]), .DI_B(ram_in[0]), .DO_B());
