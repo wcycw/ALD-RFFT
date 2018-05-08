@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module bram_dual(
+module bram(
 	Clk, En, We, Addr_A,  DI_A,  DO_A
     );
 parameter WIDTH = 32;

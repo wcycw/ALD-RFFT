@@ -1,5 +1,5 @@
 module PE ( 
-	Clk, Resetn,
+	Clk, Reset_n,
 	in0, in1, in2, in3,
 	out0, out1, out2, out3,
 	tf,
