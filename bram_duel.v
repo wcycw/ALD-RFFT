@@ -40,7 +40,7 @@ output 		[WIDTH - 1 : 0]	DO_B;
 reg	 	[WIDTH - 1 : 0]	DO_B;
 
 reg 		[WIDTH - 1 : 0]	ram 	 [0 : 63];
-
+/*
 initial begin
 ram[0] = 32'd5054899;
 ram[1] = 32'd7694708;
@@ -108,7 +108,7 @@ ram[62] = 32'd3211425;
 ram[63] = 32'd555016;
 
 end
-
+*/
 always @(posedge Clk) 
 	begin
 	if (En)
