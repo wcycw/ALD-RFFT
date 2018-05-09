@@ -132,51 +132,7 @@ always @ (*)
 			end
 		endcase
 	end
-always @ (*)
-	begin
-	begin
-	case (stage)
-		3'd0:	
-			begin
-			  addr[1] = counter[5:0];
-			w_addr[1] = w_counter[5:0];
-			end
-		3'd1:
-			begin
-			  addr[1] = { ~counter[5] : couter[4:0]}; 
-			w_addr[1] = { ~w_counter[5] : w_couter[4:0]}; 
-			end
-		3'd2:
-			begin
-			  addr[1] = { ~counter[5:4] : couter[3:0]};
-			w_addr[1] = { ~w_counter[5:4] : w_couter[3:0]}; 
-			end 
-		3'd3:
-			begin
-			  addr[1] = { ~counter[5:3] : couter[2:0]}; 
-			w_addr[1] = { ~w_counter[5:3] : w_couter[2:0]}; 
-			end
-		3'd4:
-			begin
-			  addr[1] = { ~counter[5:2] : couter[1:0]}; 
-			w_addr[1] = { ~w_counter[5:2] : w_couter[1:0]}; 
-			end
-		3'd5:
-			begin
-			  addr[1] = { ~counter[5:1] : couter[0]};
-			w_addr[1] = { ~w_counter[5:1] : w_couter[0]};
-			end 
-		3'd6:
-			begin
-			  addr[1] = ~counter[5:0]; 
-			w_addr[1] = ~w_counter[5:0]; 
-			end
-		3'd7:
-			begin
-			  addr[1] = 0;
-			w_addr[1] = 0;
-			end
-	end
+
 /*
 always @ (*)
 	begin
