@@ -1,0 +1,484 @@
+1
+ 
+****************************************
+Report : area
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:23 2018
+****************************************
+
+Library(s) Used:
+
+    scx3_cmos8rf_lpvt_tt_1p2v_25c (File: /tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db)
+
+Number of ports:                            3
+Number of nets:                            92
+Number of cells:                           89
+Number of combinational cells:             71
+Number of sequential cells:                18
+Number of macros/black boxes:               0
+Number of buf/inv:                         27
+Number of references:                      18
+
+Combinational area:                440.640012
+Buf/Inv area:                      119.520005
+Noncombinational area:             440.639992
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                   881.280004
+Total area:                 undefined
+1
+Information: Propagating switching activity (medium effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -hier
+        -analysis_effort medium
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:23 2018
+****************************************
+
+
+Library(s) Used:
+
+    scx3_cmos8rf_lpvt_tt_1p2v_25c (File: /tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db)
+
+
+Operating Conditions: tt_1p2v_25c   Library: scx3_cmos8rf_lpvt_tt_1p2v_25c
+Wire Load Model Mode: top
+
+
+Global Operating Voltage = 1.2  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1pW
+
+
+--------------------------------------------------------------------------------
+                                       Switch   Int      Leak     Total
+Hierarchy                              Power    Power    Power    Power    %
+--------------------------------------------------------------------------------
+rfft                                   7.56e-03 2.04e-02  895.939 2.79e-02 100.0
+1
+ 
+****************************************
+Report : design
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:23 2018
+****************************************
+
+Design allows ideal nets on clock nets.
+
+Library(s) Used:
+
+    scx3_cmos8rf_lpvt_tt_1p2v_25c (File: /tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db)
+
+Local Link Library:
+
+    {/tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db}
+
+Flip-Flop Types:
+
+    No flip-flop types specified.
+
+Latch Types:
+
+    No latch types specified.
+
+Operating Conditions:
+
+
+    Operating Condition Name : tt_1p2v_25c
+    Library : scx3_cmos8rf_lpvt_tt_1p2v_25c
+    Process :   1.00
+    Temperature :  25.00
+    Voltage :   1.20
+    Interconnect Model : balanced_tree
+
+Wire Loading Model:
+
+    No wire loading specified.
+
+
+Wire Loading Model Mode: top.
+
+Timing Ranges:
+
+    No timing ranges specified.
+
+Pin Input Delays:
+
+    None specified.
+
+Pin Output Delays:
+
+    None specified.
+
+Disabled Timing Arcs:
+
+    No arcs disabled.
+
+Required Licenses:
+
+    DesignWare
+
+Design Parameters:
+
+    None specified.
+1
+ 
+****************************************
+Report : cell
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:23 2018
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U706                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U707                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U708                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U709                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U710                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U711                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U712                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U713                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U714                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U715                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U716                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U717                      NAND3XLTS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U718                      OR4X2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          10.080000 
+U719                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U720                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U721                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U722                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U723                      AOI31XLTS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U724                      OAI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U725                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U726                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U727                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U728                      NAND2X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U729                      OAI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U730                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U731                      CLKBUFX2TS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U732                      CLKBUFX2TS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U733                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U734                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U735                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U736                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U737                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U738                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U740                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U741                      AND3X1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U742                      NAND2X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U743                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U744                      NAND2X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U745                      OR2X1TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U746                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U747                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U748                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U749                      NAND2X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U750                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U751                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U752                      NAND2X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U753                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U754                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U755                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U756                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U757                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U758                      NOR2XLTS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U759                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U760                      OAI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U761                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U762                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U763                      NOR2BX1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U764                      NAND4BXLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          10.080000 
+U765                      NAND2X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U766                      OAI31X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U767                      OAI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U768                      INVX2TS         scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          4.320000  
+U769                      AOI211XLTS      scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U770                      OAI21XLTS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U771                      AOI21X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U772                      NAND2X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          5.760000  
+U773                      AOI2BB1XLTS     scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          8.640000  
+U774                      OAI21XLTS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U775                      AOI21X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U776                      OAI21XLTS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+U777                      AOI21X1TS       scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          7.200000  
+counter_reg_0_            DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+counter_reg_1_            DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+counter_reg_2_            DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+counter_reg_3_            DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+counter_reg_4_            DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+counter_reg_5_            DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+counter_reg_6_            DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+done_reg                  DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+stage_reg_0_              DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+stage_reg_1_              DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+stage_reg_2_              DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+stage_reg_3_              DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+w_counter_reg_0_          DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+w_counter_reg_1_          DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+w_counter_reg_2_          DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+w_counter_reg_3_          DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+w_counter_reg_4_          DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+w_counter_reg_5_          DFFQX1TS        scx3_cmos8rf_lpvt_tt_1p2v_25c
+                                                          24.480000 n
+--------------------------------------------------------------------------------
+Total 89 cells                                            881.280004
+1
+ 
+****************************************
+Report : port
+        -verbose
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:23 2018
+****************************************
+
+
+                       Pin      Wire     Max     Max     Connection
+Port           Dir     Load     Load     Trans   Cap     Class      Attrs
+--------------------------------------------------------------------------------
+Clk            in      0.0000   0.0000    1.02    0.00   --         
+Reset_n        in      0.0000   0.0000    1.02    0.00   --         
+done           out     0.0050   0.0000   --      --      --         
+
+
+              External  Max             Min                Min       Min
+              Number    Wireload        Wireload           Pin       Wire
+Port          Points    Model           Model              Load      Load
+--------------------------------------------------------------------------------
+Clk                1      --              --              --        -- 
+Reset_n            1      --              --              --        -- 
+done               1      --              --              --        -- 
+
+                    Input Delay
+                  Min             Max       Related   Max
+Input Port    Rise    Fall    Rise    Fall   Clock  Fanout
+--------------------------------------------------------------------------------
+Clk           --      --      --      --      --      4.00
+Reset_n       --      --      --      --      --      4.00
+
+
+                    Driving Cell
+Input Port   Rise(min/max)      Fall(min/max)      Mult(min/max)  Attrs(min/max)
+--------------------------------------------------------------------------------
+Clk          INVX1TS            INVX1TS              -- /  --     
+Reset_n      INVX1TS            INVX1TS              -- /  --     
+
+
+               Max Drive      Min Drive      Resistance    Min    Min       Cell
+Input Port    Rise    Fall   Rise    Fall   Max     Min    Cap    Fanout    Deg
+--------------------------------------------------------------------------------
+Clk           --      --     --      --     --      --     --     --        -- 
+Reset_n       --      --     --      --     --      --     --     --        -- 
+
+
+               Max Tran        Min Tran
+Input Port    Rise    Fall    Rise    Fall
+--------------------------------------------------------------------------------
+Clk           --      --      --      -- 
+Reset_n       --      --      --      -- 
+
+
+                    Output Delay
+                  Min             Max      Related  Fanout
+Output Port   Rise    Fall    Rise    Fall  Clock     Load
+--------------------------------------------------------------------------------
+done          --      --      --      --      --      0.00
+
+1
+ 
+****************************************
+Report : compile_options
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:23 2018
+****************************************
+
+Design                                   Compile Option         Value
+--------------------------------------------------------------------------------
+rfft                                     flatten                false
+                                         structure              true
+                                         structure_boolean      false
+                                         structure_timing       true
+                                         fix_multiple_port_nets feedthroughs
+                                                                constants
+                                                                outputs
+                                                                buffer_constants
+                                         isolate_port           disabled
+--------------------------------------------------------------------------------
+1
+ 
+****************************************
+Report : constraint
+        -all_violators
+        -verbose
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:24 2018
+****************************************
+
+
+    Design: rfft
+
+    max_area               0.00
+  - Current Area         881.28
+  ------------------------------
+    Slack               -881.28  (VIOLATED)
+
+
+1
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nworst 100
+        -max_paths 20
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:24 2018
+****************************************
+
+Operating Conditions: tt_1p2v_25c   Library: scx3_cmos8rf_lpvt_tt_1p2v_25c
+Wire Load Model Mode: top
+
+  Startpoint: done_reg (rising edge-triggered flip-flop)
+  Endpoint: done (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  done_reg/CK (DFFQX1TS)                   0.00       0.00 r
+  done_reg/Q (DFFQX1TS)                    0.76       0.76 f
+  done (out)                               0.00       0.76 f
+  data arrival time                                   0.76
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: done_reg (rising edge-triggered flip-flop)
+  Endpoint: done (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  done_reg/CK (DFFQX1TS)                   0.00       0.00 r
+  done_reg/Q (DFFQX1TS)                    0.66       0.66 r
+  done (out)                               0.00       0.66 r
+  data arrival time                                   0.66
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
