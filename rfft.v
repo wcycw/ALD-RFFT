@@ -24,7 +24,7 @@ wire		[WIDTH - 1 : 0]		ram_in		[0 : 3];
 wire		[WIDTH - 1 : 0] 	ram_out		[0 : 3];
 reg					we ;
 
-wire 		[5 : 0] 		tf_addr;
+reg 		[7 : 0] 		tf_addr;
 wire		[2* WIDTH - 1 : 0]	tf_out;
 
 reg					bypass_n;
@@ -133,10 +133,126 @@ always @ (*)
 			end
 
 	end
-
+always @ (*)
+	begin
+	begin
+	case (stage)
+		3'd0:	
+			begin
+			  addr[1] = counter[5:0];
+			w_addr[1] = w_counter[5:0];
+			end
+		3'd1:
+			begin
+			  addr[1] = { ~counter[5] : couter[4:0]}; 
+			w_addr[1] = { ~w_counter[5] : w_couter[4:0]}; 
+			end
+		3'd2:
+			begin
+			  addr[1] = { ~counter[5:4] : couter[3:0]};
+			w_addr[1] = { ~w_counter[5:4] : w_couter[3:0]}; 
+			end 
+		3'd3:
+			begin
+			  addr[1] = { ~counter[5:3] : couter[2:0]}; 
+			w_addr[1] = { ~w_counter[5:3] : w_couter[2:0]}; 
+			end
+		3'd4:
+			begin
+			  addr[1] = { ~counter[5:2] : couter[1:0]}; 
+			w_addr[1] = { ~w_counter[5:2] : w_couter[1:0]}; 
+			end
+		3'd5:
+			begin
+			  addr[1] = { ~counter[5:1] : couter[0]};
+			w_addr[1] = { ~w_counter[5:1] : w_couter[0]};
+			end 
+		3'd6:
+			begin
+			  addr[1] = ~counter[5:0]; 
+			w_addr[1] = ~w_counter[5:0]; 
+			end
+		3'd7:
+			begin
+			  addr[1] = 0;
+			w_addr[1] = 0;
+			end
+	end
+/*
 always @ (*)
 	begin
 	//// Still missing Addr count for twiddle factor
+	case (stage)
+		3'd0:
+		begin
+			tf_counter = counter;
+		end
+		3'd1:
+		begin
+			tf_counter = {1'd0, counter[4:0]};
+		end
+		3'd2:
+		begin
+			tf_counter = {2'd0, counter[3:0]};
+		end
+		3'd3:
+		begin
+			tf_counter = {3'd0, counter[2:0]};
+		end
+		3'd4:
+		begin
+			tf_counter = {4'd0, counter[1:0]};
+		end
+		3'd5:
+		begin
+			tf_counter = {5'd0, counter[0]};
+		end
+		3'd6:
+		begin
+			tf_counter = 0;
+		end
+		3'd7:
+		begin
+			tf_counter = 0;
+		end
+	end
+*/
+always @ (*)
+	begin
+	//// Still missing Addr count for twiddle factor
+	case (stage)
+		3'd0:
+		begin
+			tf_addr = counter;
+		end
+		3'd1:
+		begin
+			td_addr = (counter[5]   == 0) ? {2'd0, counter[4 : 0], 1'd0} : {1'd0, counter[4 : 0], 2'd0};
+		end
+		3'd2:
+		begin
+			td_addr = (counter[5:4] == 0) ? {2'd0, counter[3 : 0], 2'd0} : {1'd0, counter[3 : 0], 3'd0};
+		end
+		3'd3:
+		begin
+			td_addr = (counter[5:3] == 0) ? {2'd0, counter[2 : 0], 3'd0} : {1'd0, counter[2 : 0], 4'd0};
+		end
+		3'd4:
+		begin
+			td_addr = (counter[5:2] == 0) ? {2'd0, counter[1 : 0], 4'd0} : {1'd0, counter[1 : 0], 5'd0};
+		end
+		3'd5:
+		begin
+			td_addr = (counter[5:1] == 0) ? {2'd0, counter[0], 5'd0} : {1'd0, counter[0], 6'd0};
+		end
+		3'd6:
+		begin
+			td_addr = 0;
+		end
+		3'd7:
+		begin
+			td_addr = 0;
+		end
 	end
 
 always @ (*)

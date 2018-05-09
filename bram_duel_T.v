@@ -27,19 +27,19 @@ input 		Clk;
 input 		En;
 input 		We_A;
 input		We_B;
-input 		[5 : 0]		Addr_A;
+input 		[7 : 0]		Addr_A;
 
 input 		[2 * WIDTH - 1 : 0]	DI_A;
 output 		[2 * WIDTH - 1 : 0]	DO_A;
 reg	 	[2 * WIDTH - 1 : 0]	DO_A;
 
-input 		[5 : 0]		Addr_B;
+input 		[7 : 0]		Addr_B;
 
 input 		[2 * WIDTH - 1 : 0]	DI_B;
 output 		[2 * WIDTH - 1 : 0]	DO_B;
 reg	 	[2 * WIDTH - 1 : 0]	DO_B;
 
-reg 		[2 * WIDTH - 1 : 0]	ram 	 [0 : 63];
+reg 		[2 * WIDTH - 1 : 0]	ram 	 [0 : 255];
 
 
 always @(posedge Clk) 
