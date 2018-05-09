@@ -1,0 +1,37 @@
+ 
+****************************************
+Report : timing
+        -path end
+        -delay max
+        -max_paths 10000
+        -sort_by slack
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:24 2018
+****************************************
+
+Operating Conditions: tt_1p2v_25c   Library: scx3_cmos8rf_lpvt_tt_1p2v_25c
+Wire Load Model Mode: top
+
+Endpoint                         Path Delay     Path Required     Slack
+------------------------------------------------------------------------
+stage_reg_3_/D (DFFQX1TS)           3.76 r        infinity     infinity
+stage_reg_2_/D (DFFQX1TS)           3.55 f        infinity     infinity
+stage_reg_1_/D (DFFQX1TS)           3.36 f        infinity     infinity
+stage_reg_0_/D (DFFQX1TS)           2.91 f        infinity     infinity
+counter_reg_6_/D (DFFQX1TS)         2.39 r        infinity     infinity
+counter_reg_2_/D (DFFQX1TS)         2.34 f        infinity     infinity
+counter_reg_4_/D (DFFQX1TS)         2.34 f        infinity     infinity
+done_reg/D (DFFQX1TS)               2.29 r        infinity     infinity
+w_counter_reg_3_/D (DFFQX1TS)       2.20 f        infinity     infinity
+w_counter_reg_5_/D (DFFQX1TS)       2.15 f        infinity     infinity
+counter_reg_5_/D (DFFQX1TS)         2.15 f        infinity     infinity
+counter_reg_3_/D (DFFQX1TS)         2.15 f        infinity     infinity
+counter_reg_1_/D (DFFQX1TS)         2.15 f        infinity     infinity
+w_counter_reg_1_/D (DFFQX1TS)       2.14 f        infinity     infinity
+w_counter_reg_4_/D (DFFQX1TS)       2.03 f        infinity     infinity
+w_counter_reg_2_/D (DFFQX1TS)       2.03 f        infinity     infinity
+w_counter_reg_0_/D (DFFQX1TS)       2.02 f        infinity     infinity
+counter_reg_0_/D (DFFQX1TS)         1.15 r        infinity     infinity
+
+1

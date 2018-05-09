@@ -1,0 +1,20 @@
+ 
+****************************************
+Report : timing
+        -path end
+        -delay max
+        -max_paths 10000
+        -sort_by slack
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:24 2018
+****************************************
+
+Operating Conditions: tt_1p2v_25c   Library: scx3_cmos8rf_lpvt_tt_1p2v_25c
+Wire Load Model Mode: top
+
+Endpoint                         Path Delay     Path Required     Slack
+------------------------------------------------------------------------
+done (out)                          0.76 f        infinity     infinity
+
+1

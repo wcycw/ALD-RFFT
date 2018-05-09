@@ -1,0 +1,78 @@
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+          Version J-2014.09-SP2 for RHEL64 -- Nov 25, 2014
+               Copyright (c) 1988-2014 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+#########################################
+# TCL script for Design Compiler        #
+# MS 2015                               #
+#########################################
+#########################################
+# READ Design and Library               #
+#########################################
+set top_level rfft
+rfft
+source -verbose "../common_script/common.tcl"
+. /tools4/syn2007.12/libraries/syn/
+dw_foundation.sldb
+* /tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db dw_foundation.sldb
+/tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db
+/tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db
+read_verilog {../$top_level.v, ../bram_duel.v, ../bram_duel_T.v, ../PE.v}
+Loading db file '/tools2/courses/ee6321/share/ibm13rflpvt/synopsys/scx3_cmos8rf_lpvt_tt_1p2v_25c.db'
+Loading db file '/usr/cad/syn/libraries/syn/dw_foundation.sldb'
+Loading db file '/usr/cad/syn/libraries/syn/gtech.db'
+Loading db file '/usr/cad/syn/libraries/syn/standard.sldb'
+  Loading link library 'scx3_cmos8rf_lpvt_tt_1p2v_25c'
+  Loading link library 'gtech'
+Loading verilog files: '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v' '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel.v' '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel_T.v' '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/PE.v' 
+Detecting input file type automatically (-rtl or -netlist).
+Reading with Presto HDL Compiler (equivalent to -rtl option).
+Running PRESTO HDLC
+Compiling source file /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:146: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:147: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:151: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:152: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:156: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:157: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:161: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:162: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:166: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:167: Syntax error at or near token ':'. (VER-294)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v:179: Syntax error at or near token 'end'. (VER-294)
+Compiling source file /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel.v
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel.v:24: Redeclaration of symbol 'WIDTH' as parameter. (VER-116)
+Error:  /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel.v:26: Redeclaration of port 'Clk' is not allowed. (VER-121)
+Compiling source file /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel_T.v
+Compiling source file /homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/PE.v
+*** Presto compilation terminated with 13 errors. ***
+Error: Can't read 'verilog' files '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/rfft.v', '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel.v', '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/bram_duel_T.v', '/homes/user/spring18/hz2485/Project/RFFT/ALD-RFFT/PE.v'. (UID-9)
+No designs were read
+set set_fix_multiple_port_nets "true"
+true
+list_designs
+Warning: No designs to list. (UID-275)
+0
+if { [check_error -v] == 1 } { exit 1 }
+{UID-9}
+
+Thank you...

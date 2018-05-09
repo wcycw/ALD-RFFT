@@ -1,0 +1,31 @@
+ 
+****************************************
+Report : timing
+        -path short
+        -delay min
+        -max_paths 10000
+        -sort_by slack
+Design : rfft
+Version: J-2014.09-SP2
+Date   : Tue May  8 22:17:24 2018
+****************************************
+
+Operating Conditions: tt_1p2v_25c   Library: scx3_cmos8rf_lpvt_tt_1p2v_25c
+Wire Load Model Mode: top
+
+  Startpoint: done_reg (rising edge-triggered flip-flop)
+  Endpoint: done (output port)
+  Path Group: (none)
+  Path Type: min
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  done_reg/CK (DFFQX1TS)                   0.00       0.00 r
+  done_reg/Q (DFFQX1TS)                    0.66       0.66 r
+  done (out)                               0.00       0.66 r
+  data arrival time                                   0.66
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
