@@ -174,7 +174,6 @@ always @ (*)
 */
 always @ (*)
 	begin
-	//// Still missing Addr count for twiddle factor
 	case (stage)
 		3'd0:
 		begin
@@ -182,32 +181,33 @@ always @ (*)
 		end
 		3'd1:
 		begin
-			td_addr = (counter[5]   == 0) ? {2'd0, counter[4 : 0], 1'd0} : {1'd0, counter[4 : 0], 2'd0};
+			tf_addr = (counter[5]   == 0) ? {2'd0, counter[4 : 0], 1'd0} : {1'd0, counter[4 : 0], 2'd0};
 		end
 		3'd2:
 		begin
-			td_addr = (counter[5:4] == 0) ? {2'd0, counter[3 : 0], 2'd0} : {1'd0, counter[3 : 0], 3'd0};
+			tf_addr = (counter[5:4] == 0) ? {2'd0, counter[3 : 0], 2'd0} : {1'd0, counter[3 : 0], 3'd0};
 		end
 		3'd3:
 		begin
-			td_addr = (counter[5:3] == 0) ? {2'd0, counter[2 : 0], 3'd0} : {1'd0, counter[2 : 0], 4'd0};
+			tf_addr = (counter[5:3] == 0) ? {2'd0, counter[2 : 0], 3'd0} : {1'd0, counter[2 : 0], 4'd0};
 		end
 		3'd4:
 		begin
-			td_addr = (counter[5:2] == 0) ? {2'd0, counter[1 : 0], 4'd0} : {1'd0, counter[1 : 0], 5'd0};
+			tf_addr = (counter[5:2] == 0) ? {2'd0, counter[1 : 0], 4'd0} : {1'd0, counter[1 : 0], 5'd0};
 		end
 		3'd5:
 		begin
-			td_addr = (counter[5:1] == 0) ? {2'd0, counter[0], 5'd0} : {1'd0, counter[0], 6'd0};
+			tf_addr = (counter[5:1] == 0) ? {2'd0, counter[0], 5'd0} : {1'd0, counter[0], 6'd0};
 		end
 		3'd6:
 		begin
-			td_addr = 0;
+			tf_addr = 0;
 		end
 		3'd7:
 		begin
-			td_addr = 0;
+			tf_addr = 0;
 		end
+	endcase
 	end
 
 always @ (*)
