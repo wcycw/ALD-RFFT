@@ -49,9 +49,7 @@ always @(posedge Clk)
 		if (We_A)
 			ram[Addr_A] <= DI_A;
 		DO_A <= ram[Addr_A];
-		end 
-	end
-	begin
+		end
 	if (En)
 		begin
 		if (We_B)
