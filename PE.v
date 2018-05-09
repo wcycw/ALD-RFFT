@@ -25,12 +25,12 @@ output reg 	[WIDTH - 1 : 0]		out3;
 input 		[2 * WIDTH - 1 : 0]	tf;
 input 					bypass_n;
 
-reg		[WIDTH - 1 : 0]		tf0_r
-reg		[WIDTH - 1 : 0]		tf0_i
+reg		[WIDTH - 1 : 0]		tf0_r;
+reg		[WIDTH - 1 : 0]		tf0_i;
 reg		[WIDTH - 1 : 0]		mid0[0 : 3];
 reg		[WIDTH - 1 : 0]		mid1[0 : 3];
-reg		[WIDTH - 1 : 0]		mid11_r[0 : 1];
-reg		[WIDTH - 1 : 0]		mid11_i[0 : 1];
+reg		[2 * WIDTH - 1 : 0]		mid11[0 : 1];
+
 
 
 
@@ -47,12 +47,12 @@ always @ (posedge Clk)
 		end
 	else 
 		begin
-		mid0_r[0] <= in0 + in1;
-		mid0_r[1] <= in0 - in1;
-		mid0_r[2] <= in2 + in3;
-		mid0_r[3] <= in2 - in3;	
+		mid0[0] <= in0 + in1;
+		mid0[1] <= in0 - in1;
+		mid0[2] <= in2 + in3;
+		mid0[3] <= in2 - in3;	
 		tf0_r <= tf[2 * WIDTH - 1 : WIDTH];
-		tr0_i <= tf[WIDTH - 1 : 0];
+		tf0_i <= tf[WIDTH - 1 : 0];
 		end
 	end
 
@@ -74,7 +74,7 @@ always @ (posedge Clk)
 		mid1[2] <= mid0[1];
 		mid1[3] <= mid0[3];
 		mid11[0] <= mid0[1] * tf0_r - mid0[3] * tf0_i;
-		mid11[1] <= - (mid0[1] * tf0_i + mid0[3] * tf0_ir);		
+		mid11[1] <= - (mid0[1] * tf0_i + mid0[3] * tf0_r);		
 		end
 	end
 
