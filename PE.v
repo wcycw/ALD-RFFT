@@ -98,10 +98,10 @@ always @ (posedge Clk)
 		end
 	else 
 		begin
-		mid2[0] <= mid0[0];
-		mid2[1] <= mid0[2];
-		mid2[2] <= mid0[1];
-		mid2[3] <= mid0[3];
+		mid2[0] <= mid1[0];
+		mid2[1] <= mid1[1];
+		mid2[2] <= mid1[2];
+		mid2[3] <= mid1[3];
 		mid12[0] <= mid11[0] - mid1[3] * tf1_i;
 		mid12[1] <= mid11[1] - mid1[3] * tf1_r;		
 		end
