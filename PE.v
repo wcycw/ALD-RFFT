@@ -27,10 +27,13 @@ input 					bypass_n;
 
 reg		[WIDTH - 1 : 0]		tf0_r;
 reg		[WIDTH - 1 : 0]		tf0_i;
+reg		[WIDTH - 1 : 0]		tf1_r;
+reg		[WIDTH - 1 : 0]		tf1_i;
 reg		[WIDTH - 1 : 0]		mid0[0 : 3];
 reg		[WIDTH - 1 : 0]		mid1[0 : 3];
+reg		[WIDTH - 1 : 0]		mid2[0 : 3];
 reg		[2 * WIDTH - 1 : 0]		mid11[0 : 1];
-
+reg		[2 * WIDTH - 1 : 0]		mid12[0 : 1];
 
 
 
@@ -66,6 +69,8 @@ always @ (posedge Clk)
 		mid1[3] <= 0;
 		mid11[0] <= 0;
 		mid11[1] <= 0;
+		tf1_r <= 0;
+		tf1_i <= 0;
 		end
 	else 
 		begin
@@ -73,10 +78,35 @@ always @ (posedge Clk)
 		mid1[1] <= mid0[2];
 		mid1[2] <= mid0[1];
 		mid1[3] <= mid0[3];
-		mid11[0] <= mid0[1] * tf0_r - mid0[3] * tf0_i;
-		mid11[1] <= - (mid0[1] * tf0_i + mid0[3] * tf0_r);		
+		mid11[0] <= mid0[1] * tf0_r ;
+		mid11[1] <= -(mid0[1] * tf0_i) ;
+		tf1_r <= tf_0r;
+		tf1_i <= tf_1i;
 		end
 	end
+	
+always @ (posedge Clk)
+	begin
+	if (Reset_n == 1'b0)
+		begin
+		mid2[0] <= 0;
+		mid2[1] <= 0;
+		mid2[2] <= 0;
+		mid2[3] <= 0;
+		mid12[0] <= 0;
+		mid12[1] <= 0;
+		end
+	else 
+		begin
+		mid2[0] <= mid0[0];
+		mid2[1] <= mid0[2];
+		mid2[2] <= mid0[1];
+		mid2[3] <= mid0[3];
+		mid12[0] <= mid11[0] - mid1[3] * tf1_i;
+		mid12[1] <= mid11[1] - mid1[3] * tf1_r;		
+		end
+	end
+
 
 
 always @ (posedge Clk)
@@ -90,10 +120,10 @@ always @ (posedge Clk)
 		end
 	else 
 		begin
-		out0 <= mid1[0];
-		out1 <= mid1[1];
-		out2 <= (bypass_n) ? mid11[0][SHIFT + WIDTH - 1 : SHIFT] : mid1[2];
-		out3 <= (bypass_n) ? mid11[1][SHIFT + WIDTH - 1 : SHIFT] : mid1[3];
+		out0 <= mid2[0];
+		out1 <= mid2[1];
+		out2 <= (bypass_n) ? mid12[0][SHIFT + WIDTH - 1 : SHIFT] : mid2[2];
+		out3 <= (bypass_n) ? mid12[1][SHIFT + WIDTH - 1 : SHIFT] : mid2[3];
 		end
 	end
 
