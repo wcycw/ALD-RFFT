@@ -7,7 +7,7 @@ module rfft (
 	Addr, Input, Write 
 );
 
-parameter WIDTH = 32;
+parameter WIDTH = 16;
 parameter LIMIT = 63;  // 256/4-1
 parameter VALID = 2;   // clock for to be valide
 

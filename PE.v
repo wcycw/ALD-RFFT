@@ -6,8 +6,8 @@ module pe (
 	bypass_n
 );
 
-parameter WIDTH = 32;
-parameter SHIFT = 16;
+parameter WIDTH = 16;
+parameter SHIFT = 8;
 
 input					Clk;
 input 					Reset_n;

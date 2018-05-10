@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ps / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
@@ -21,7 +21,7 @@
 module bram_duel(
 	Clk, En, We_A, Addr_A,  DI_A,  DO_A, We_B, Addr_B,  DI_B,  DO_B
     );
-parameter WIDTH = 32;
+parameter WIDTH = 16;
 
 input 		Clk;
 input 		En;
