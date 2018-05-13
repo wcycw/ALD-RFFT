@@ -9,7 +9,7 @@ module rfft (
 
 parameter WIDTH = 16;
 parameter LIMIT = 63;  // 256/4-1
-parameter VALID = 2;   // clock for to be valide
+parameter VALID = 7;   // clock for to be valide
 
 input 					Clk;
 input 					Reset_n;
@@ -53,12 +53,12 @@ reg		[WIDTH - 1 : 0] 	in 		[0 : 3];
 wire		[WIDTH - 1 : 0] 	out 		[0 : 3];
 
 //A_port for Read, B_port for write 
-bram_duel ram0(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(32'd0), .DO_A(ram_out[0]), .We_B(we), .Addr_B(w_addr[0]), .DI_B(ram_in[0]), .DO_B());
-bram_duel ram1(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(32'd0), .DO_A(ram_out[1]), .We_B(we), .Addr_B(w_addr[0]), .DI_B(ram_in[1]), .DO_B());
-bram_duel ram2(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(32'd0), .DO_A(ram_out[2]), .We_B(we), .Addr_B(w_addr[1]), .DI_B(ram_in[2]), .DO_B());
-bram_duel ram3(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(32'd0), .DO_A(ram_out[3]), .We_B(we), .Addr_B(w_addr[1]), .DI_B(ram_in[3]), .DO_B());
+bram_duel ram0(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(16'd0), .DO_A(ram_out[0]), .We_B(we), .Addr_B(w_addr[0]), .DI_B(ram_in[0]), .DO_B());
+bram_duel ram1(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[0]), .DI_A(16'd0), .DO_A(ram_out[1]), .We_B(we), .Addr_B(w_addr[0]), .DI_B(ram_in[1]), .DO_B());
+bram_duel ram2(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(16'd0), .DO_A(ram_out[2]), .We_B(we), .Addr_B(w_addr[1]), .DI_B(ram_in[2]), .DO_B());
+bram_duel ram3(.Clk(Clk), .En(1'b1), .We_A(1'b0), .Addr_A(addr[1]), .DI_A(16'd0), .DO_A(ram_out[3]), .We_B(we), .Addr_B(w_addr[1]), .DI_B(ram_in[3]), .DO_B());
 
-bram_duel_T tfram(.Clk(Clk), .En(1'b1), .We_A(Tf_we), .Addr_A(tf_addr), .DI_A(Tf_in), .DO_A(tf_out), .We_B(1'b0), .Addr_B(8'd0), .DI_B(64'd0), .DO_B());
+bram_duel_T tfram(.Clk(Clk), .En(1'b1), .We_A(Tf_we), .Addr_A(tf_addr), .DI_A(Tf_in), .DO_A(tf_out), .We_B(1'b0), .Addr_B(8'd0), .DI_B(32'd0), .DO_B());
 
 pe pe0 (
 	.Clk(Clk), .Reset_n(Reset_n),

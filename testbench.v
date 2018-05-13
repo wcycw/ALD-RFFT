@@ -1,29 +1,31 @@
 
-`timescale 1ns/1ps
+`timescale 1ps/1ps
 `define HALF_CLOCK_PERIOD #1
 
 module Testbench();
 
 parameter WIDTH = 16;
-reg	[WIDTH - 1 : 0] ram [0 : 256];
-reg [WIDTH - 1 : 0] Dout0, Dout1, Dout2, Dout3;
+reg	[WIDTH - 1 : 0] ram [0 : 255];
+wire [WIDTH - 1 : 0] Dout0, Dout1, Dout2, Dout3;
 reg [WIDTH - 1 : 0] Din0, Din1, Din2, Din3;
 reg [5 : 0] addr_I;
+integer i;
 reg clk, reset_n;
 reg Einput, Ewrite;
-reg done;
+wire [2*WIDTH - 1 : 0]  Tf_in ;
+wire [7:0]  Addr_T;
+wire Tf_we, done;
 
-rfft rfft0(.Clk(clk), .Reset_n(reset_n), .done(done), .Din0(Din0), .Din1(Din1), .Din2(Din2), .Din3(Din3), .Dout0(Dout0), .Dout1(Dout1), .Dout2(Dout2), .Dout3(Dout3), .Addr(addr_I), .Input(Einput), .Write(Ewrite));
+rfft rfft0(.Clk(clk), .Reset_n(reset_n), .done(done), .Din0(Din0), .Din1(Din1), .Din2(Din2), .Din3(Din3), .Dout0(Dout0), .Dout1(Dout1), .Dout2(Dout2), .Dout3(Dout3), .Tf_in(Tf_in), .Addr_T(Addr_T), .Tf_we(Tf_we), .Addr(addr_I), .Input(Einput), .Write(Ewrite));
 
 always begin
-	`HALF_CLOCK_PERIOD;
-	clk = ~clk;
+	#1 clk = ~clk;
 end
 
 initial begin
 
 clk = 0;
-resetn = 0;
+reset_n = 0;
 ram[0] = {8'd1,8'b00000000};
 ram[1] = {8'd1,8'b00000000};
 ram[2] = {8'd4,8'b00000000};
@@ -174,7 +176,7 @@ ram[146] = {8'd1,8'b00000000};
 ram[147] = {8'd1,8'b00000000};
 ram[148] = {8'd1,8'b00000000};
 ram[149] = {8'd1,8'b00000000};
-ram[150] = {8‘d14,8'b00000000};
+ram[150] = {8'd14,8'b00000000};
 ram[151] = {8'd1,8'b00000000};
 ram[152] = {8'd2,8'b00000000};
 ram[153] = {8'd2,8'b00000000};
@@ -287,7 +289,7 @@ reset_n = 1;
 
 @(posedge clk);
 Einput = 1;
-Eoutput = 0;
+Ewrite = 1;
 for (i=0 ; i<64 ; i=i+1)
 begin
 	addr_I= i;
@@ -302,18 +304,19 @@ Einput = 0;
 
 @(posedge done);
 @(posedge clk);
-Ewrite = 0;
+Einput = 1;
 
 for (i=0 ; i<64 ; i=i+1)
 begin
 	addr_I= i;
-	ram[i*4] = Dout0 ;
-	ram[i*4 + 1] = Dout1 ;
-	ram[i*4 + 2] = Dout2 ;
-	ram[i*4 + 3] = Dout3 ;
+//	ram[i*4] = Dout0 ;
+//	ram[i*4 + 1] = Dout1 ;
+//	ram[i*4 + 2] = Dout2 ;
+//	ram[i*4 + 3] = Dout3 ;
 	@(posedge clk);
 end
 
-
+$stop;
 
 end
+endmodule

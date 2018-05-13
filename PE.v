@@ -36,8 +36,11 @@ reg			[WIDTH - 1 : 0]		mid0[0 : 3];
 reg			[WIDTH - 1 : 0]		mid1[0 : 3];
 reg			[WIDTH - 1 : 0]		mid2[0 : 3];
 reg			[WIDTH - 1 : 0]		mid3[0 : 3];
-reg			[2 * WIDTH - 1 : 0]		mid11[0 : 1];
-reg			[2 * WIDTH - 1 : 0]		mid12[0 : 1];
+reg			[WIDTH - 1 : 0]		mid4[0 : 3];
+reg			[2 * WIDTH - 2 : 0]		mid11[0 : 1];
+reg			[2 * WIDTH - 2 : 0]		mid12[0 : 1];
+reg   signbit[0:3];
+reg			[2 * WIDTH - 1 : 0]		mid13[0 : 1];
 reg			[2 * WIDTH - 1 : 0]		midout[0 : 1];
 
 // read data and transfer them into 2'c
@@ -131,10 +134,14 @@ always @ (posedge Clk)
 		mid2[1] <= mid1[1];
 		mid2[2] <= mid1[2];
 		mid2[3] <= mid1[3];
-		mid11[0] <= { mid1[2][WIDTH-1]^tf1_r[WIDTH-1] , 31'b(mid1[2][WIDTH-2:0] * tf1_r[ WIDTH-2:0])};
-		mid11[1] <= { mid1[2][WIDTH-1]^tf1_i[WIDTH-1] , 31'b(mid1[2][WIDTH-2:0] * tf1_i[ WIDTH-2:0])};
-		mid12[0] <= { mid1[3][WIDTH-1]^tf1_i[WIDTH-1] , 31'b(mid1[3][WIDTH-2:0] * tf1_i[ WIDTH-2:0])};
-		mid12[1] <= { mid1[3][WIDTH-1]^tf1_r[WIDTH-1] , 31'b(mid1[3][WIDTH-2:0] * tf1_r[ WIDTH-2:0])};		
+		signbit[0] <= mid1[2][WIDTH-1]^tf1_r[WIDTH-1];
+		signbit[1] <= mid1[2][WIDTH-1]^tf1_i[WIDTH-1];
+		signbit[2] <= mid1[3][WIDTH-1]^tf1_i[WIDTH-1];
+		signbit[3] <= mid1[3][WIDTH-1]^tf1_r[WIDTH-1];
+		mid11[0] <=  mid1[2][WIDTH-2:0] * tf1_r[ WIDTH-2:0];
+		mid11[1] <=  mid1[2][WIDTH-2:0] * tf1_i[ WIDTH-2:0];
+		mid12[0] <=  mid1[3][WIDTH-2:0] * tf1_i[ WIDTH-2:0];
+		mid12[1] <=  mid1[3][WIDTH-2:0] * tf1_r[ WIDTH-2:0];		
 		end
 	end
 
@@ -147,8 +154,8 @@ always @ (posedge Clk)
 		mid3[1] <= 0;
 		mid3[2] <= 0;
 		mid3[3] <= 0;
-		midout[0] <= 0;
-		midout[1] <= 0;
+		mid13[0] <= 0;
+		mid13[1] <= 0;
 		end
 	else 
 		begin
@@ -156,11 +163,31 @@ always @ (posedge Clk)
 		mid3[1]<= mid2[1];
 		mid3[2]<= mid2[2];
 		mid3[3]<= mid2[3];
-		midout[0] <= ((mid11[0][2*WIDTH - 1])?(~{1'b0,mid11[0][2*WIDTH - 2:0]}+ 1'b1): mid11[0]) - ((mid12[0][2*WIDTH - 1])?(~{1'b0,mid12[0][2*WIDTH - 2:0]}+ 1'b1): mid12[0]);
-		midout[1] <= 0 - ((mid11[1][2*WIDTH - 1])?(~{1'b0,mid11[1][2*WIDTH - 2:0]}+ 1'b1): mid11[1]) - ((mid12[1][2*WIDTH - 1])?(~{1'b0,mid12[1][2*WIDTH - 2:0]}+ 1'b1): mid12[1]);
+		mid13[0] <= (signbit[0]?(~{1'b0,mid11[0]}+ 1'b1): {1'b0,mid11[0]}) - (signbit[2]?(~{1'b0,mid12[0]}+ 1'b1): {1'b0,mid12[0]});
+		mid13[1] <= 0 - (signbit[1]?(~{1'b0,mid11[1]}+ 1'b1): {1'b0,mid11[1]}) - (signbit[3]?(~{1'b0,mid12[1]}+ 1'b1): {1'b0,mid12[1]});
 		end
 	end
-
+always @ (posedge Clk)
+	begin
+	if (Reset_n == 1'b0)
+		begin
+		mid4[0] <= 0;
+		mid4[1] <= 0;
+		mid4[2] <= 0;
+		mid4[3] <= 0;
+		midout[0] <= 0;
+		midout[1] <= 0;
+		end
+	else 
+		begin
+		mid4[0] <= mid3[0];
+		mid4[1] <= mid3[1];
+		mid4[2] <= mid3[2];
+		mid4[3] <= mid3[3];
+		midout[0] <= (mid13[0][2*WIDTH-1])? {1'b1,~(mid13[0][2*WIDTH - 2:0]- 1'b1)}:mid13[0];
+		midout[1] <= (mid13[1][2*WIDTH-1])? {1'b1,~(mid13[1][2*WIDTH - 2:0]- 1'b1)}:mid13[1];
+		end
+	end
 //output
 always @ (posedge Clk)
 	begin
@@ -173,10 +200,10 @@ always @ (posedge Clk)
 		end
 	else 
 		begin
-		out0 <= mid3[0];
-		out1 <= mid3[1];
-		out2 <= (bypass_n) ? ({midout[0][2*WIDTH-1], ((midout[0][2*WIDTH-1])?{1'b1,~(midout[0][2*WIDTH - 2:0]- 1'b1)} : midout[0])[SHIFT + WIDTH - 2 : SHIFT]}): mid3[2];
-		out3 <= (bypass_n) ? ({midout[1][2*WIDTH-1], ((midout[0][2*WIDTH-1])?{1'b1,~(midout[0][2*WIDTH - 2:0]- 1'b1)} : midout[0])[SHIFT + WIDTH - 2 : SHIFT]}): mid3[3];
+		out0 <= mid4[0];
+		out1 <= mid4[1];
+		out2 <= (bypass_n) ? {midout[0][2*WIDTH-1], midout[0][SHIFT + WIDTH - 2 : SHIFT]}:mid4[2];
+		out3 <= (bypass_n) ? {midout[1][2*WIDTH-1], midout[0][SHIFT + WIDTH - 2 : SHIFT]}:mid4[3];
 		end
 	end
 
